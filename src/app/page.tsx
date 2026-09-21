@@ -46,35 +46,24 @@ export default function Home() {
           {/* Floral animation overlay */}
           <FloralOverlay />
 
-          {/* ── SECTION 2 (overlaid): Google Maps embed ──
-               Exact grey placeholder on invitation-clean.png (x=153–1610, y=8169–9626)
-               within clipped frame height 9745:
-               top=8169/9745, height=1458/9745, left=153/1760, width=1458/1760 */}
-          <div
-            className="absolute z-[1000] overflow-hidden rounded-[16px]"
-            style={{ top: "83.828%", left: "8.693%", width: "82.841%", height: "14.962%" }}
-          >
-            {/* Map preview — non-interactive, visual only */}
-            <iframe
-              title="Princess Kainat Wedding Hall Location"
-              src="https://www.google.com/maps?q=Princess%20Kainat%20Wedding%20Lawn%2C%20Shilphata%20Road%2C%20Mumbra%2C%20Maharashtra%2C%20India&output=embed"
-              className="absolute inset-0 block h-full w-full max-w-none border-0 pointer-events-none"
-              loading="lazy"
-              allowFullScreen
-              referrerPolicy="strict-origin-when-cross-origin"
-              tabIndex={-1}
-              aria-hidden="true"
-            />
-            {/* Transparent click layer — opens Google Maps navigation */}
-            <a
-              href="https://www.google.com/maps/dir/?api=1&destination=Princess+Kainat+Wedding+Lawn,+Shilphata+Road,+Mumbra,+Maharashtra,+India"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Open venue in Google Maps"
-              className="absolute inset-0 z-[1001] cursor-pointer"
-              style={{ WebkitTapHighlightColor: "transparent" }}
-            />
-          </div>
+          {/* ── SECTION 2: Clickable venue map ──
+               Map image is rendered directly on the clean invitation base (cc).
+               Only the map image is clickable, opening the venue directly.
+               Petals render above the map because this has z-index below PetalFall (999). */}
+          <a
+            href="https://share.google/Yia5l5VDYNNCtrBR"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open Princess Kainat Wedding Hall location in Google Maps"
+            className="absolute z-20 cursor-pointer rounded-[16px]"
+            style={{
+              top: "83.48%",
+              left: "6.53%",
+              width: "86.88%",
+              height: "15.82%",
+              WebkitTapHighlightColor: "transparent",
+            }}
+          />
         </div>
 
           {/* Location flower — prior position (left flush + bottom), smaller size */}
@@ -82,7 +71,7 @@ export default function Home() {
             src="/images/flower-location-bl.png"
             alt=""
             aria-hidden="true"
-            className="absolute z-[1002] h-auto origin-bottom-left flower-sway-d pointer-events-none select-none"
+            className="absolute z-20 h-auto origin-bottom-left flower-sway-d pointer-events-none select-none"
             style={{
               width: "32%",
               left: "-7.68%",
@@ -110,11 +99,15 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Gold divider */}
-          <div className="flex items-center gap-3 mb-4 px-2">
-            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#DEC285] to-transparent opacity-70" />
-            <span className="text-[#C9A85C] text-base leading-none">✦</span>
-            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#DEC285] to-transparent opacity-70" />
+          {/* Fleur-de-lis divider — identical to Celebration Begins divider */}
+          <div className="flex justify-center mb-4 px-2">
+            <img
+              src="/images/celebration-divider.png?v=3"
+              alt=""
+              aria-hidden="true"
+              className="w-[84%] max-w-[360px] h-auto block select-none pointer-events-none"
+              draggable={false}
+            />
           </div>
 
           {/* Date tiles — 22 / NOVEMBER / 2026 shown directly */}
