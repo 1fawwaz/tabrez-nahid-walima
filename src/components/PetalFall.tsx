@@ -41,7 +41,7 @@ export default function PetalFall() {
         position: "fixed",
         inset: 0,
         pointerEvents: "none",
-        zIndex: 999,
+        zIndex: 1010,
       }}
     >
       {PETALS.map((p, i) => (

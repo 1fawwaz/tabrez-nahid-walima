@@ -15,7 +15,7 @@ export default function Home() {
       {/* ── Persistent background music player & elegant toggle ── */}
       <BackgroundMusic />
 
-      {/* Petals ONLY after intro video has completely finished */}
+      {/* Petals ONLY after intro video has completely finished — continuously falling through entire site */}
       {petalsActive && <PetalFall />}
 
       {/* Intro (fixed, once) → couple (in-flow 100vh, loops forever); invite flush below */}
@@ -51,7 +51,7 @@ export default function Home() {
                Only the map image is clickable, opening the venue directly.
                Petals render above the map because this has z-index below PetalFall (999). */}
           <a
-            href="https://share.google/Yia5l5VDYNNCtrBR"
+            href="https://www.google.com/maps/search/?api=1&query=Kainat%20Wedding%20Hall%2C%20Shilphata%2C%20Mumbra%2C%20Maharashtra%20400612"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Open Princess Kainat Wedding Hall location in Google Maps"
@@ -84,7 +84,7 @@ export default function Home() {
         {/* ══════════════════════════════════════════════════════════
             SECTION 3: THE DATE — date shown directly (no scratch)
             ══════════════════════════════════════════════════════════ */}
-        <div className="relative z-[1000] w-full bg-[#FDF4EB] px-5 pt-5 pb-2">
+        <div className="relative z-10 w-full bg-[#FDF4EB] px-5 pt-5 pb-2">
           {/* Heading — script, matching invitation-clean reference */}
           <div className="text-center mb-2">
             <p
@@ -110,12 +110,12 @@ export default function Home() {
             />
           </div>
 
-          {/* Date tiles — 22 / NOVEMBER / 2026 shown directly */}
+          {/* Date tiles — 22 / NOV / 2026 shown directly */}
           <div className="flex justify-center items-start gap-3">
             {[
-              { value: "22", label: "DAY", small: false },
-              { value: "NOVEMBER", label: "MONTH", small: true },
-              { value: "2026", label: "YEAR", small: false },
+              { value: "22", label: "DAY" },
+              { value: "NOV", label: "MONTH" },
+              { value: "2026", label: "YEAR" },
             ].map((tile) => (
               <div key={tile.label} className="flex flex-col items-center gap-1.5 select-none">
                 <div
@@ -126,9 +126,7 @@ export default function Home() {
                   }}
                 >
                   <span
-                    className={`font-semibold text-[#8A6825] tracking-wide text-center leading-tight px-1 ${
-                      tile.small ? "text-[clamp(9px,2.6vw,13px)]" : "text-[clamp(18px,5.5vw,28px)]"
-                    }`}
+                    className="font-semibold text-[#8A6825] tracking-wide text-center leading-tight px-1 text-[clamp(18px,5.5vw,28px)]"
                     style={{ fontFamily: "var(--serif)" }}
                   >
                     {tile.value}
@@ -166,7 +164,7 @@ export default function Home() {
         {/* ══════════════════════════════════════════════════════════
             SECTION 4: THE CELEBRATION BEGINS — live countdown
             ══════════════════════════════════════════════════════════ */}
-        <div className="relative z-[1000] w-full bg-[#FDF4EB] px-5 pt-6 pb-0">
+        <div className="relative z-10 w-full bg-[#FDF4EB] px-5 pt-6 pb-0">
 
           {/* Heading — script, matching invitation-clean reference */}
           <div className="text-center mb-2">

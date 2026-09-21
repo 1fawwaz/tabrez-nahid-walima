@@ -248,7 +248,7 @@ body { margin: 0; font-variant-numeric: lining-nums; font-family: var(--serif); 
   padding: 0;
   overflow: hidden;
   pointer-events: none;
-  z-index: 999;
+  z-index: 1010;
   contain: layout style;
 }
 .petal-rain__item {
