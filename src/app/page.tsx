@@ -238,7 +238,7 @@ export default function Home() {
               src="/images/flower-final-br.png"
               alt=""
               className="absolute w-[58%] max-w-[265px] h-auto origin-bottom-right flower-sway-f pointer-events-none select-none"
-              style={{ bottom: "36px", right: "-16px" }}
+              style={{ bottom: "36px", right: "-41px" }}
               draggable={false}
             />
           </div>
