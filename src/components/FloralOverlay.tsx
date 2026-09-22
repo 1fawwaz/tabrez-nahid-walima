@@ -13,8 +13,8 @@ export const FloralOverlay: React.FC = () => {
       <img
         src="/images/flower-section1-bl.png"
         alt=""
-        className="absolute left-0 w-[40%] max-w-[170px] h-auto origin-bottom-left flower-sway-a pointer-events-none select-none"
-        style={{ bottom: "calc(31% + 36px)" }}
+        className="absolute w-[40%] max-w-[170px] h-auto origin-bottom-left flower-sway-a pointer-events-none select-none"
+        style={{ bottom: "calc(31% + 36px)", left: "-16px" }}
         draggable={false}
       />
 
@@ -22,8 +22,8 @@ export const FloralOverlay: React.FC = () => {
       <img
         src="/images/flower-section1-br.png"
         alt=""
-        className="absolute right-0 w-[40%] max-w-[170px] h-auto origin-bottom-right flower-sway-b pointer-events-none select-none"
-        style={{ bottom: "calc(31% + 36px)" }}
+        className="absolute w-[40%] max-w-[170px] h-auto origin-bottom-right flower-sway-b pointer-events-none select-none"
+        style={{ bottom: "calc(31% + 36px)", right: "-16px" }}
         draggable={false}
       />
 
@@ -31,8 +31,8 @@ export const FloralOverlay: React.FC = () => {
       <img
         src="/images/flower-location-tr.png"
         alt=""
-        className="absolute right-0 w-[40%] max-w-[170px] h-auto origin-top-right flower-sway-c pointer-events-none select-none"
-        style={{ top: "calc(72% - 15px)" }}
+        className="absolute w-[40%] max-w-[170px] h-auto origin-top-right flower-sway-c pointer-events-none select-none"
+        style={{ top: "calc(72% - 15px)", right: "-16px" }}
         draggable={false}
       />
     </div>

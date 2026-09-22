@@ -230,14 +230,15 @@ export default function Home() {
             <img
               src="/images/flower-final-tl.png"
               alt=""
-              className="absolute top-0 left-0 w-[58%] max-w-[265px] h-auto origin-top-left flower-sway-e pointer-events-none select-none"
+              className="absolute w-[58%] max-w-[265px] h-auto origin-top-left flower-sway-e pointer-events-none select-none"
+              style={{ top: "-16px", left: "-16px" }}
               draggable={false}
             />
             <img
               src="/images/flower-final-br.png"
               alt=""
-              className="absolute right-0 w-[58%] max-w-[265px] h-auto origin-bottom-right flower-sway-f pointer-events-none select-none"
-              style={{ bottom: "36px" }}
+              className="absolute w-[58%] max-w-[265px] h-auto origin-bottom-right flower-sway-f pointer-events-none select-none"
+              style={{ bottom: "36px", right: "-16px" }}
               draggable={false}
             />
           </div>
