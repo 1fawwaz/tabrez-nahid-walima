@@ -217,7 +217,7 @@ export default function Home() {
             - Centered 3D circular T&N monogram seal
             - Geometric gold diamond pattern along the bottom
             ══════════════════════════════════════════════════════════ */}
-        <div className="relative w-full bg-[#FDF4EB]">
+        <div className="relative w-full bg-[#FDF4EB] overflow-hidden">
           <img
             src="/images/hope-final-clean.png"
             alt="Hope to see you there - With Love, Waghoo Family"
@@ -226,19 +226,19 @@ export default function Home() {
           />
 
           {/* Final section flowers — each asset exactly once */}
-          <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
             <img
               src="/images/flower-final-tl.png"
               alt=""
               className="absolute w-[58%] max-w-[265px] h-auto origin-top-left flower-sway-e pointer-events-none select-none"
-              style={{ top: "-50px", left: "-16px" }}
+              style={{ top: "0px", left: "0px" }}
               draggable={false}
             />
             <img
               src="/images/flower-final-br.png"
               alt=""
               className="absolute w-[58%] max-w-[265px] h-auto origin-bottom-right flower-sway-f pointer-events-none select-none"
-              style={{ bottom: "36px", right: "12px" }}
+              style={{ bottom: "36px", right: "-16px" }}
               draggable={false}
             />
           </div>
