@@ -49,13 +49,36 @@ export default function MusicPlayer() {
     const onPause = () => {
       if (!a.ended) arm(); // interrupted by the system, resume on the next gesture
     };
+    let wasPlayingBeforeHide = false;
+
+    const pauseOnHide = () => {
+      if (!a.paused && !a.ended) {
+        wasPlayingBeforeHide = true;
+      }
+      a.pause();
+    };
+
+    const resumeOnVisible = () => {
+      if (wasPlayingBeforeHide) {
+        wasPlayingBeforeHide = false;
+        start();
+      }
+    };
+
     const onVisible = () => {
-      if (document.visibilityState === "visible") start();
+      if (document.hidden || document.visibilityState === "hidden") {
+        pauseOnHide();
+      } else if (document.visibilityState === "visible") {
+        resumeOnVisible();
+      }
     };
 
     a.addEventListener("playing", onPlaying);
     a.addEventListener("pause", onPause);
     document.addEventListener("visibilitychange", onVisible);
+    window.addEventListener("pagehide", pauseOnHide);
+    window.addEventListener("pageshow", resumeOnVisible);
+    document.addEventListener("freeze", pauseOnHide);
     arm();
     start(); // 1. attempt autoplay right away
 
@@ -63,6 +86,9 @@ export default function MusicPlayer() {
       a.removeEventListener("playing", onPlaying);
       a.removeEventListener("pause", onPause);
       document.removeEventListener("visibilitychange", onVisible);
+      window.removeEventListener("pagehide", pauseOnHide);
+      window.removeEventListener("pageshow", resumeOnVisible);
+      document.removeEventListener("freeze", pauseOnHide);
       disarm();
     };
   }, []);

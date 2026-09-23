@@ -10,6 +10,7 @@ export default function BackgroundMusic() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const userPausedRef = useRef(false);
   const unlockedRef = useRef(false);
+  const wasPlayingBeforeHideRef = useRef(false);
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
@@ -33,6 +34,7 @@ export default function BackgroundMusic() {
 
     const tryStart = () => {
       if (userPausedRef.current) return;
+      if (typeof document !== "undefined" && (document.hidden || document.visibilityState === "hidden")) return;
       audio
         .play()
         .then(() => {
@@ -45,10 +47,13 @@ export default function BackgroundMusic() {
     };
 
     // Immediate autoplay attempt (works when allowed; otherwise waits for gesture)
-    tryStart();
+    if (typeof document !== "undefined" && !document.hidden && document.visibilityState === "visible") {
+      tryStart();
+    }
 
     const onGesture = (e: Event) => {
       if (userPausedRef.current) return;
+      if (typeof document !== "undefined" && (document.hidden || document.visibilityState === "hidden")) return;
       const t = e.target as HTMLElement | null;
       if (t?.closest?.("[data-music-toggle]")) return;
       tryStart();
@@ -59,19 +64,54 @@ export default function BackgroundMusic() {
       window.addEventListener(ev, onGesture, { capture: true, passive: true });
     });
 
-    // iOS / Android: resume attempt when tab becomes visible again (unless user paused)
-    const onVisible = () => {
-      if (document.visibilityState === "visible" && !userPausedRef.current) {
+    // Page Visibility API + pagehide/pageshow/freeze:
+    // Music must play ONLY while the wedding website is actively OPEN and VISIBLE.
+    const pauseMusicOnHide = () => {
+      if (!audio.paused && !audio.ended) {
+        wasPlayingBeforeHideRef.current = true;
+      }
+      audio.pause();
+      setIsPlaying(false);
+    };
+
+    const resumeMusicOnVisible = () => {
+      if (wasPlayingBeforeHideRef.current && !userPausedRef.current) {
+        wasPlayingBeforeHideRef.current = false;
         tryStart();
       }
     };
-    document.addEventListener("visibilitychange", onVisible);
+
+    const onVisibilityChange = () => {
+      if (document.hidden || document.visibilityState === "hidden") {
+        pauseMusicOnHide();
+      } else if (document.visibilityState === "visible") {
+        resumeMusicOnVisible();
+      }
+    };
+
+    const onPageHide = () => {
+      pauseMusicOnHide();
+    };
+
+    const onPageShow = () => {
+      if (!document.hidden && document.visibilityState === "visible") {
+        resumeMusicOnVisible();
+      }
+    };
+
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    window.addEventListener("pagehide", onPageHide);
+    window.addEventListener("pageshow", onPageShow);
+    document.addEventListener("freeze", pauseMusicOnHide);
 
     sync();
 
     return () => {
       gestureEvents.forEach((ev) => window.removeEventListener(ev, onGesture, true));
-      document.removeEventListener("visibilitychange", onVisible);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      window.removeEventListener("pagehide", onPageHide);
+      window.removeEventListener("pageshow", onPageShow);
+      document.removeEventListener("freeze", pauseMusicOnHide);
       audio.removeEventListener("playing", onPlaying);
       audio.removeEventListener("play", onPlaying);
       audio.removeEventListener("pause", onPause);
@@ -85,6 +125,7 @@ export default function BackgroundMusic() {
     if (!audio.paused) {
       // Explicit user pause — must stick
       userPausedRef.current = true;
+      wasPlayingBeforeHideRef.current = false;
       audio.pause();
       setIsPlaying(false);
       return;
@@ -92,6 +133,7 @@ export default function BackgroundMusic() {
 
     // Explicit user play
     userPausedRef.current = false;
+    wasPlayingBeforeHideRef.current = false;
     audio
       .play()
       .then(() => {
